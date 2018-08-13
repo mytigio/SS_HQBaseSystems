@@ -9,8 +9,9 @@ struct worker
   float WaterPickinessValue = 0.5 ;defaults to 0.5.  How large the impact from water quality related losses and gains to morale is.  A pickier person gaines more from high quality water and and losses more from low quality water.
   float CleanlinessPickinessValue = 0.5 ;default to 0.5.  How large the impact from cleanliness related losses and gains to morale is.  A pickier person gains more from high cleanliness and losses more from low cleanliness.
   
-  float LoyaltyLevel = 0.5 ;defaults to 0.2.  The characters loyalty level.  More loyal characters will take more shit (sustain a lower morale) before deserting HQ or defecting/sabatoging the base.
+  float LoyaltyLevel = 0.2 ;defaults to 0.2.  The characters loyalty level.  More loyal characters will take more shit (sustain a lower morale) before deserting HQ or defecting/sabatoging the base.
   float Morale = 0.0 ;the current total morale for this worker.  Accumulates over time. Consider breaking into multiple values
+  float Cleanliness = 0.0 ;the current cleanliness for this worker.  Recalculated daily. Used to adjust morale and as a modifier to health related roles.
   float GeneralHealth = 0.0 ;the current health level for this worker.  If it's at or above the base health value (determiend by endurance), the worker is at full or improved productivity.  If it is below the base health value, the worker will be at reduced productivity
 endStruct
 
@@ -33,18 +34,27 @@ EndFunction
 Function FeedWorkers(SimSettlementsHQ:HQFoodManagement foodMgtQuest)
   int index = 0
   while index < workerContainers.Length
-    workerContainers[index].FeedWorkers(foodMgtQuest)
+    FeedWorker(index,foodMgtQuest)
     index += 1
   endwhile
+EndFunction
+
+Function FeedWorker(int index, SimSettlementsHQ:HQFoodManagement foodMgtQuest)
+	workerContainers[index].FeedWorkers(foodMgtQuest)
 EndFunction
 
 ;we pass the mangement quest to use from the calling script.  This should make testing easier since we could extend the normal management quest with a stubbed out version for simpler testing.
 Function WaterWorkers(SimSettlementsHQ:HQWaterManagement waterMgtQuest)
 	int index = 0
 	while index < workerContainers.Length
-		workerContainers[index].WaterWorkers(waterMgtQuest)
+		WaterWorker(index,waterMgtQuest)
 		index += 1
 	endwhile
+EndFunction
+
+;a function for watering a single worker. Used in both the WaterWorkers function when watering all workers or in the daily management function so we don't have to loop all workers repeatedly.
+Function WaterWorker(int index, SimSettlementsHQ:HQWaterManagement waterMgtQuest)
+	workerContainers[index].WaterWorkers(waterMgtQuest)
 EndFunction
 
 Function AddToHQ(Actor actorToAdd, WorkshopScript arrivingFrom)

@@ -75,11 +75,11 @@ float Function ConsumeWater(int amountToConsume = 1)
     endif
   endif
 
-  ;if the NPC still needs water, dip into the spoiling water. Yuk.
+  ;if the NPC still needs water, dip into the dirty water. Yuk.
   if waterToProvide > 0 && CurrentStoredDirtyWater > 0
     if waterToProvide > CurrentStoredDirtyWater
       avgQualityConsumed = avgQualityConsumed + (CurrentStoredDirtyWater * StoredDirtyWaterQuality)
-      waterToProvide -= CurrentStoredDirtyWater; deduct however much spoiling water we have left.
+      waterToProvide -= CurrentStoredDirtyWater; deduct however much dirty water we have left.
       CurrentStoredDirtyWater = 0 ;consumed all the shitty stored water.
     else
       avgQualityConsumed += (waterToProvide * StoredDirtyWaterQuality)
