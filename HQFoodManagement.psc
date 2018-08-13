@@ -38,7 +38,7 @@ EndProperty
 
 ;Calculates new food daily.  This can be obtained in several ways: via trade from the commonwealth (requires caravan workers or similar?), production from settlements with supply trains to HQ (special plot in the settlements?), provided by Player (donation box), or grown in HQ (very limited until Food Paste is provided?)
 Int Function CalculateNewFood()
-  return 10 ;currently stubbed out to just provide a flat 10, but this should be calculated based on the various food sources as the HQ system develops.
+  return 10 ;currently stubbed out to just provide a flat 10, but this should be calculated based on the various food sources as the HQ system develops over time based on incoming caravans and purchased food.
 EndFunction
 
 ;Food is consumed in the following order and has effects as the food consumtion progresses through the stages.  Normally a worker consumes 1 food, but I'm building this to allow for multiple food units to be consumed at a time for flexibility:
@@ -75,7 +75,7 @@ float Function ConsumeFood(int amountToConsume = 1)
     endif
   endif
 
-  ;if the NPC still needs food, dip into the spoiling food. Yuk.
+  ;if the NPC still needs food, dip into the spoiling food. Yuk. Lowers the food quality.
   if foodToProvide > 0 && CurrentStoredSpoiledFood > 0
     if foodToProvide > CurrentStoredSpoiledFood
       avgQualityConsumed = avgQualityConsumed + (CurrentStoredSpoiledFood * StoredSpoilingFoodQuality)
