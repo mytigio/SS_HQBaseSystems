@@ -1,6 +1,6 @@
 Scriptname SimSettlementsHQ:WorkerContainer extends ObjectReference
 
-SimSettlementsHQ:HQWorkerManagement:worker[] Property Workers Auto
+
 
 Int Property BaseFoodMoraleAdjustment = 200 AutoReadOnly
 Int Property BaseWaterMoraleAdjustment = 200 AutoReadOnly
@@ -9,6 +9,8 @@ Int Property BaseWaterHealthAdjustment = 50 AutoReadOnly
 
 ActorValue Property FoodPickinessAV Auto
 ActorValue Property WaterPickinessAV Auto
+
+SimSettlementsHQ:HQWorkerManagement:worker[] Workers
 
 Bool Property IsFull
   Bool Function Get()
@@ -21,7 +23,7 @@ Function Initialize()
 EndFunction
 
 bool Function AddActor(Actor actorToAdd)
-  if !workers
+  if !Workers
     Initialize()
   endif
 
