@@ -56,11 +56,13 @@ Function WaterWorkers(SimSettlementsHQ:HQWaterManagement mgtQuest)
 	
 	
 	;now check for a hit to cleanliness.  Cleanliness hits will just adjust the cleanliness itself, we'll deal with the impact on morale from low cleanliness in that section.
-	int CleanlinessAdjustment = CalculateCleanlinessAdjustmentForWater(index, quality)
+	int CleanlinessAdjustment = CalculateCleanlinessAdjustmentForWater(index, quality, mgtQuest)
 	
-	Workers[index].Cleanliness
+	Workers[index].Cleanliness -= CleanlinessAdjustment
+	
 	;finally we check if there was no water or the water was non-poteable.  At this level there is a direct hit to health. Again we only deal with damaging the NPCs health, not the other impacts that damage might have.
-	int HealthAdjustment = CalculateHealthAdjustmentForWater(index, quality)
+	int HealthAdjustment = CalculateHealthAdjustmentForWater(index, quality, mgtQuest)
+	Workers[index].GeneralHealth -= HealthAdjustment
 	
     index += 1
   endwhile
@@ -103,11 +105,19 @@ int Function CalculateCleanlinessAdjustmentForWater(int index, float waterQualit
 	
 	if(waterQuality <= mgtQuest.StoredDirtyWaterQuality)
 		;the water is dirty water or lower, calculate the impact on cleanliness.  The dirtier the water, the bigger the impact.
-		CleanlinessHit = BaseWaterCleanlinessAdjustment - BaseWaterCleanlinessAdjustment * waterQuality
+		CleanlinessHit = Math.Floor(BaseWaterCleanlinessAdjustment - BaseWaterCleanlinessAdjustment * waterQuality)
 	endif
 	
 	return CleanlinessHit
 EndFunction
 
 int Function CalculateHealthAdjustmentForWater(int index, float waterQuality, SimSettlementsHQ:HQWaterManagement mgtQuest)
+	int HealthHit = 0
+	
+	if(waterQuality <= (mgtQuest.StoredDirtyWaterQuality / 2.0))
+		;water was half the dirty score or less, calculate the impact on health.  The dirtier the water, the bigger the impact.
+		HealthHit = Math.Floor(BaseWaterHealthAdjustment - BaseWaterHealthAdjustment * waterQuality)
+	endif
+	
+	return HealthHit
 EndFunction
