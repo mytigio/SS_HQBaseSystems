@@ -24,6 +24,8 @@ EndProperty
 
 Int TodaysFreshFood = 0 ;how much food was produced for the current day.  Calculated and stored at the beginning of the days processing then reduced throughout the process as needed until empty.  Leftover fresh food will be placed into storage at the end of the daily processing.
 
+Int TodaysRottedFood = 0 ;how much food rotted on the current day.  Is used currently for food storage related pest disasters.
+
 Float Property FreshFoodQuality
   Float Function Get()
     Return Math.Min(StoredPristineFoodQuality + 0.20, 1.0) ;Fresh food is 0.2 better then stored prestine food up to a max of 1 (which is perfect quality)
@@ -104,13 +106,16 @@ Function DailyUpkeep(SimSettlementsHQ:HQWorkerManagement workerManagementQuest)
   ;2) then calculate the amount of stored food to spoil.
   ;3) finally move as much food as possible (up to the calculated amount) from the prestine to the spoiled category
   int foodToSpoil = Math.Floor(CurrentStoredPristineFood * PercentStoredFoodToSpoil)
-  CurrentStoredSpoiledFood -= Math.Min(foodToSpoil,CurrentStoredSpoiledFood) As Int
+  TodaysRottedFood = Math.Min(foodToSpoil,CurrentStoredSpoiledFood) As Int
+  CurrentStoredSpoiledFood -= TodaysRottedFood
+  
+  ;debating if I should be checking for food storage related disasters here or in a seperate area dedicated to disasters.  I think I might need a dedicated Quest for disaster management to handle various disaster conditions and make sure we don't have too many disasters triggering at one time.
+  
   int spoiledFood = Math.Min(CurrentStoredPristineFood,foodToSpoil) As Int
   CurrentStoredPristineFood -= spoiledFood
   CurrentStoredSpoiledFood += spoiledFood
 
   ;if there is any fresh food left, move it into the storedprestine food grouping.
-  CurrentStoredPristineFood += TodaysFreshFood
-  
+  CurrentStoredPristineFood += TodaysFreshFood  
   
 EndFunction
