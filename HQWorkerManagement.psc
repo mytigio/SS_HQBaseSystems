@@ -34,27 +34,18 @@ EndFunction
 Function FeedWorkers(SimSettlementsHQ:HQFoodManagement foodMgtQuest)
   int index = 0
   while index < workerContainers.Length
-    FeedWorker(index,foodMgtQuest)
+    workerContainers[index].FeedWorkers(foodMgtQuest)
     index += 1
   endwhile
-EndFunction
-
-Function FeedWorker(int index, SimSettlementsHQ:HQFoodManagement foodMgtQuest)
-	workerContainers[index].FeedWorkers(foodMgtQuest)
 EndFunction
 
 ;we pass the mangement quest to use from the calling script.  This should make testing easier since we could extend the normal management quest with a stubbed out version for simpler testing.
 Function WaterWorkers(SimSettlementsHQ:HQWaterManagement waterMgtQuest)
 	int index = 0
 	while index < workerContainers.Length
-		WaterWorker(index,waterMgtQuest)
+		workerContainers[index].WaterWorkers(waterMgtQuest)
 		index += 1
 	endwhile
-EndFunction
-
-;a function for watering a single worker. Used in both the WaterWorkers function when watering all workers or in the daily management function so we don't have to loop all workers repeatedly.
-Function WaterWorker(int index, SimSettlementsHQ:HQWaterManagement waterMgtQuest)
-	workerContainers[index].WaterWorkers(waterMgtQuest)
 EndFunction
 
 Function AddToHQ(Actor actorToAdd, WorkshopScript arrivingFrom)
@@ -117,7 +108,7 @@ SimSettlementsHQ:Workercontainer Function GetUnfilledContainer()
   
 EndFunction
 
-SimSettlementsHQ:Workercontainer Function CreateNewWorkerContainer()
+SimSettlementsHQ:WorkerContainer Function CreateNewWorkerContainer()
 	SimSettlementsHQ:WorkerContainer newWorkerContainer = SS_HQ_Management_Main.StorageCellXMarker.PlaceAtMe(WorkerContainerFurnatureItem,1,false,false,false) as SimSettlementsHQ:WorkerContainer
 	return newWorkerContainer
 EndFunction
