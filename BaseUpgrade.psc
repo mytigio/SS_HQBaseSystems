@@ -27,8 +27,9 @@ Bool Function MeetsUpgradeRequirements()
 		return true
 EndFunction
 
-Function BuildUpgrade(ObjectReference buildLocationMarker)
-	;does the actual Build of the upgrade.  I suspect the first and most common type of upgrade will be a PlotBasedBaseUpgrade which will take a marker and place a "plot" like structure on that X-marker for location and facing.	
+Function BuildUpgrade()
+	;does the actual Build of the upgrade.  I suspect the first and most common type of upgrade will be a PlotBasedBaseUpgrade which will take a marker and place a "plot" like structure on that X-marker for location and facing.
+	;having said that this base script does nothing on this front and it's only implimented in the final classes.  ToDo: determine if papyrus has an "Abstract" class concept to avoid issues with this script type.
 EndFunction
 
 
