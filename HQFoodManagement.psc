@@ -18,7 +18,7 @@ Int Property CurrentStoredSpoiledFood Auto
 
 Float Property StoredSpoilingFoodQuality
   Float Function Get()
-    Return Math.Max(StoredPristineFoodQuality - 0.30, 0.0)
+    Return Math.Max(StoredPristineFoodQuality - 0.30, 0.0) ;spoiling food is 0.3 worse then fresh food, to a minimum of 0 (which is basically not food at all any longer)
   EndFunction
 EndProperty
 
@@ -26,7 +26,7 @@ Int TodaysFreshFood = 0 ;how much food was produced for the current day.  Calcul
 
 Float Property FreshFoodQuality
   Float Function Get()
-    Return Math.Min(StoredPristineFoodQuality + 0.20, 1.0)
+    Return Math.Min(StoredPristineFoodQuality + 0.20, 1.0) ;Fresh food is 0.2 better then stored prestine food up to a max of 1 (which is perfect quality)
   EndFunction
 EndProperty
 
@@ -109,6 +109,8 @@ Function DailyUpkeep(SimSettlementsHQ:HQWorkerManagement workerManagementQuest)
   CurrentStoredPristineFood -= spoiledFood
   CurrentStoredSpoiledFood += spoiledFood
 
-  ;finally, if there is any fresh food left, move it into the storedprestine food grouping.
+  ;if there is any fresh food left, move it into the storedprestine food grouping.
   CurrentStoredPristineFood += TodaysFreshFood
+  
+  
 EndFunction

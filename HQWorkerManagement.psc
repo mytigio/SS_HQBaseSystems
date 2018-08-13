@@ -108,6 +108,6 @@ SimSettlementsHQ:Workercontainer Function GetUnfilledContainer()
 EndFunction
 
 SimSettlementsHQ:Workercontainer Function CreateNewWorkerContainer()
-	SimSettlementsHQ:WorkerContainer newWorkerContainer = HQManagement.StorageCellXMarker.PlaceAtMe(WorkerContainerFurnatureItem,1,false,false,false) as SimSettlementsHQ:WorkerContainer
+	SimSettlementsHQ:WorkerContainer newWorkerContainer = SS_HQ_Management_Main.StorageCellXMarker.PlaceAtMe(WorkerContainerFurnatureItem,1,false,false,false) as SimSettlementsHQ:WorkerContainer
 	return newWorkerContainer
 EndFunction

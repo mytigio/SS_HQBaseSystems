@@ -1,10 +1,10 @@
 Scriptname SimSettlementsHQ:HQManaagement extends Quest
 Group ChildManagementQuests
-  SimSettlementsHQ:HQFoodManagement Property SS_HQ_Management_Food Auto
-  SimSettlementsHQ:HQWaterManagement Property SS_HQ_Management_Water Auto
-  SimSettlementsHQ:HQMoraleManagement Property SS_HQ_Management_Morale Auto
-  SimSettlementsHQ:HQReputationManagement Property SS_HQ_Management_Reputation Auto
-  SimSettlementsHQ:HQWorkerManagement Property SS_HQ_Management_Workers Auto
+  SimSettlementsHQ:HQFoodManagement Property SS_HQ_Management_Food Auto Mandatory
+  SimSettlementsHQ:HQWaterManagement Property SS_HQ_Management_Water Auto Mandatory
+  SimSettlementsHQ:HQMoraleManagement Property SS_HQ_Management_Morale Auto Mandatory
+  SimSettlementsHQ:HQReputationManagement Property SS_HQ_Management_Reputation Auto Mandatory
+  SimSettlementsHQ:HQWorkerManagement Property SS_HQ_Management_Workers Auto Mandatory
 EndGroup
 
 Group GeneralHelperReferences
@@ -15,14 +15,12 @@ EndGroup
 Group FoodStorage
   ;The amount of fresh food in storage.  Used to handle shortfalls, sudden spikes or losses from quests, attacks or upgrades, etc.  Can be purchased from the commonwealth, shipped in from settlements or brought by the player. Food is consumed from storage first, then if more food is needed is taken from incoming food, if more is needed it is taken from spoiling food (below).  Once all workers are fed, if any food is left in storage, rot is applied and moved to spoiling, then finally remaining ;new food is added to storage.
   Int Property StoredPristineFood
-    Int Function Get()
-      if SS_HQ_Management_Food
-        if SS_HQ_Management_Food.CurrentStoredPristineFood
-          return SS_HQ_Management_Food.CurrentStoredPristineFood
-        else
-          return 0
-        endif
-      endif
+    Int Function Get()      
+		if SS_HQ_Management_Food.CurrentStoredPristineFood
+		  return SS_HQ_Management_Food.CurrentStoredPristineFood
+		else
+		  return 0
+		endif      
     EndFunction
   EndProperty
 
