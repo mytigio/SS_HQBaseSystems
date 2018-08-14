@@ -4,7 +4,16 @@ struct worker
   ;the actual actor this worker represents.
   Actor NPC
   
-  ;The personality profile.  Copied over from the Actor when he is first added to HQ.
+  ;Traits. The Actors SPECIAL Scores. Copied over from the Actor when they are sent to HQ. Stored here so they can be accessed even when the Actor is unloaded.
+  float Strength = 0.0
+  float Perception = 0.0
+  float Endurance = 0.0
+  float Charisma = 0.0
+  float Intellegence = 0.0
+  float Agility = 0.0
+  float Luck = 0.0
+  
+  ;The personality profile.  Copied over from the Actor when he is first added to HQ. Some of these values could be derived from Perks on the Actor as well such as "Glutton" or "Slob".
   float FoodPickinessValue = 0.5 ;defaults to 0.5.  How large the impact from food quality related losses and gains to morale is.  A pickier person gaines more from high quality food and and losses more from low quality food.
   float WaterPickinessValue = 0.5 ;defaults to 0.5.  How large the impact from water quality related losses and gains to morale is.  A pickier person gaines more from high quality water and and losses more from low quality water.
   float CleanlinessPickinessValue = 0.5 ;default to 0.5.  How large the impact from cleanliness related losses and gains to morale is.  A pickier person gains more from high cleanliness and losses more from low cleanliness.
