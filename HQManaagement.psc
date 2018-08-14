@@ -28,21 +28,33 @@ Group FoodStorage
   ;The amount of spoiling food in storage.  When rot is applying, it will delete food from spoiling food if any remains after feeding workers but before adding new spoilage from fresh food.  If spoiled food stores are used, a morale penalty is applied.
   Int Property StoredSpoilingFood
     Int Function Get()
-      if SS_HQ_Management_Food
-        if SS_HQ_Management_Food.CurrentStoredSpoiledFood
-          return SS_HQ_Management_Food.CurrentStoredSpoiledFood
-        else
-          return 0
-        endif
-      endif
+      if SS_HQ_Management_Food.CurrentStoredSpoiledFood
+        return SS_HQ_Management_Food.CurrentStoredSpoiledFood
+      else
+        return 0
+      endif      
     EndFunction
   EndProperty
 EndGroup
 
 Group WaterStorage
-  Int Property StoredCleanWater Auto
+  Int Property StoredCleanWater
+	Int Function Get()
+		if SS_HQ_Management_Water.CurrentStoredPristineWater
+			return SS_HQ_Management_Water.CurrentStoredPristineWater
+		else
+			return 0
+		endif
+	EndFunction
   {The amount of clean water in storage.  Used to handle shortfalls, sudden spikes or losses from quests, attacks or upgrades, etc. Can be purchased from the commonwealth, purified from dirty water storage, or shipped in from settlements.}
-  Int Property StoredDirtyWater Auto
+  Int Property StoredDirtyWater
+	Int Function Get()
+		if SS_HQ_Management_Water.CurrentStoredDirtyWater
+			return SS_HQ_Management_Water.CurrentStoredDirtyWater
+		else
+			return 0
+		endif
+	EndFunction
   {The amount of dirty water in storage.  Clean water becomes dirty over time as it is contaminated.  The amount of clean water that becomes contaminated each day is reduced as better water storage and transport methods are found.  Dirty water can also be purified back into clean water with purification methods.  If clean water is insufficient to meet HQ needs, dirty water will be used at a morale penalty.}
 EndGroup
 
@@ -56,6 +68,7 @@ EndGroup
 Group SocialScores
   Int Property CurrentMorale Auto
   {Calculated each day by averaging out the morale of all individual workers in HQ.}
+  
   Int Property CurrentReputation Auto
   {How well-known throughout the commonwealth you are.  As more quests are completed, add reputation.  Calculated based on number of main quests and side quests completed (per the stats page), number of dungeons cleared and workshops unlocked.}
 EndGroup
