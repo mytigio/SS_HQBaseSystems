@@ -38,24 +38,27 @@ Group FoodStorage
 EndGroup
 
 Group WaterStorage
-  Int Property StoredCleanWater
-	Int Function Get()
-		if SS_HQ_Management_Water.CurrentStoredPristineWater
-			return SS_HQ_Management_Water.CurrentStoredPristineWater
-		else
-			return 0
-		endif
-	EndFunction
-  {The amount of clean water in storage.  Used to handle shortfalls, sudden spikes or losses from quests, attacks or upgrades, etc. Can be purchased from the commonwealth, purified from dirty water storage, or shipped in from settlements.}
-  Int Property StoredDirtyWater
-	Int Function Get()
-		if SS_HQ_Management_Water.CurrentStoredDirtyWater
-			return SS_HQ_Management_Water.CurrentStoredDirtyWater
-		else
-			return 0
-		endif
-	EndFunction
-  {The amount of dirty water in storage.  Clean water becomes dirty over time as it is contaminated.  The amount of clean water that becomes contaminated each day is reduced as better water storage and transport methods are found.  Dirty water can also be purified back into clean water with purification methods.  If clean water is insufficient to meet HQ needs, dirty water will be used at a morale penalty.}
+	;The amount of clean water in storage.  Used to handle shortfalls, sudden spikes or losses from quests, attacks or upgrades, etc. Can be purchased from the commonwealth, purified from dirty water storage, or shipped in from settlements.}
+	Int Property StoredCleanWater
+		Int Function Get()
+			if SS_HQ_Management_Water.CurrentStoredPristineWater
+				return SS_HQ_Management_Water.CurrentStoredPristineWater
+			else
+				return 0
+			endif
+		EndFunction
+	EndProperty
+  
+	;The amount of dirty water in storage.  Clean water becomes dirty over time as it is contaminated.  The amount of clean water that becomes contaminated each day is reduced as better water storage and transport methods are found.  Dirty water can also be purified back into clean water with purification methods.  If clean water is insufficient to meet HQ needs, dirty water will be used at a morale penalty.}
+	Int Property StoredDirtyWater
+		Int Function Get()
+			if SS_HQ_Management_Water.CurrentStoredDirtyWater
+				return SS_HQ_Management_Water.CurrentStoredDirtyWater
+			else
+				return 0
+			endif
+		EndFunction
+	EndProperty  
 EndGroup
 
 Group ConflictScores

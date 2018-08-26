@@ -4,10 +4,10 @@ Scriptname SimSettlementsHQ:HQReputationManagement extends Quest
 ;this page is very important for what we're doing here: https://www.creationkit.com/fallout4/index.php?title=QueryStat_-_Game since it is the method used to get game tracked Stats.
 ;this page lists the known tracked stats: https://www.creationkit.com/fallout4/index.php?title=IncrementStat_-_Game
 
-Int Property ReputationPerMinorQuest Auto = 10
+Int Property ReputationPerMinorQuest = 10 Auto 
 {Amount of reputation gained per minor quest completed.}
 
-Int Property ReputationPerMajorQuest Auto = 50
+Int Property ReputationPerMajorQuest = 50 Auto 
 {Amount of reputation gained per major quest completed.}
 
 Int Property BaseReputation

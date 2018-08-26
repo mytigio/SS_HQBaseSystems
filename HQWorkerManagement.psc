@@ -32,7 +32,7 @@ EndGroup
 ;If we find we need more then 16,384 however, we'll need to either build a container of containers of workers or manually manage multple arrays of workerContainers.  New workerContainers will be spawned as needed in a holding Cell.
 SimSettlementsHQ:WorkerContainer[] workerContainers
 
-Form Property WorkerContainerFurnatureItem Auto Const
+Form Property WorkerContainerItem Auto Const
 
 
 Function Initialize()
@@ -118,6 +118,6 @@ SimSettlementsHQ:Workercontainer Function GetUnfilledContainer()
 EndFunction
 
 SimSettlementsHQ:WorkerContainer Function CreateNewWorkerContainer()
-	SimSettlementsHQ:WorkerContainer newWorkerContainer = SS_HQ_Management_Main.StorageCellXMarker.PlaceAtMe(WorkerContainerFurnatureItem,1,false,false,false) as SimSettlementsHQ:WorkerContainer
+	SimSettlementsHQ:WorkerContainer newWorkerContainer = SS_HQ_Management_Main.StorageCellXMarker.PlaceAtMe(WorkerContainerItem,1,false,false,false) as SimSettlementsHQ:WorkerContainer
 	return newWorkerContainer
 EndFunction
